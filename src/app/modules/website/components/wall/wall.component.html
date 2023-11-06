@@ -1,0 +1,86 @@
+<mat-drawer-container autosize>
+	<mat-drawer #drawer class="container" mode="side">
+
+		<app-panel></app-panel>
+
+	</mat-drawer>
+
+	<div class="container is-fluid" (click)="drawer.toggle()">
+		<div class="">
+			<div class="notification is-link is-light">
+				This container is <strong>fluid</strong>: it will have a 32px gap on either side, on any
+				viewport size.
+			</div>
+			<section class="section">
+				<h1 class="title">Section</h1>
+				<h2 class="subtitle">
+					A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+				</h2>
+			</section>
+		</div>
+
+		<app-foldy></app-foldy>
+
+		<!-- Iteraciones para demás -->
+		<app-foldy></app-foldy>
+
+	</div>
+
+</mat-drawer-container>
+
+<footer class="footer">
+	<div class="content has-text-centered">
+		<p>
+			<i>Semillero de Investigación en Ecuaciones Diferenciales Ordinarias en Python </i><strong>(SIEDOPy)</strong> by
+			<a href="https://jgthms.com">Luis E. López</a>. El código fuente está licenciado por el <a
+				href="http://opensource.org/licenses/mit-license.php">MIT</a>. Desarrollo de Daniel R, David R, Jackeline R,
+			Over V.
+		</p>
+	</div>
+</footer>
+
+<div class="container is-widescreen">
+
+	<div class="container is-widescreen block">
+		<mat-card>
+			<mat-card-content><strong>Simple card</strong></mat-card-content>
+			<footer class="card-footer">
+				<a href="#" class="card-footer-item">Save</a>
+				<a href="#" class="card-footer-item">Edit</a>
+				<a href="#" class="card-footer-item">Delete</a>
+			</footer>
+		</mat-card>
+	</div>
+
+	<div class="container is-widescreen block">
+
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">
+					Component
+				</p>
+				<button class="card-header-icon" aria-label="more options">
+					<span class="icon">
+						<i class="fas fa-angle-down" aria-hidden="true"></i>
+					</span>
+				</button>
+			</header>
+			<div class="card-content">
+				<div class="content">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+					<a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+					<br>
+					<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="container is-widescreen block">
+		<mat-card>
+			<mat-card-content>Simple card</mat-card-content>
+		</mat-card>
+	</div>
+
+</div>

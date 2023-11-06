@@ -1,0 +1,32 @@
+<mat-accordion>
+
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Nueva Operación | Datos operación <!--! Título variable ! {Nueva operación | Datos operación} -->
+      </mat-panel-title>
+      <mat-panel-description>
+        Acá es posible la creación de nuevas operaciones con Ecuaciones Diferenciales Ordinarias
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <p>This is the primary content of the panel.</p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Aproximaciones
+      </mat-panel-title>
+      <mat-panel-description>
+        Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="columns">
+      <div class="image column">Tabla de resultados 01<img src="https://bulma.io/images/placeholders/128x128.png"></div>
+      <div class="image column">Tabla de resultados 02<img src="https://bulma.io/images/placeholders/128x128.png"></div>
+      <div class="image column">Tabla de resultados 03<img src="https://bulma.io/images/placeholders/128x128.png"></div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>
