@@ -1,0 +1,76 @@
+<form *ngIf='ApproxData' [formGroup]='formData' class='container box'>
+  <!-- <mat-checkbox [formControl]='hideRequiredControl'>
+    Hide required marker
+  </mat-checkbox> -->
+
+  <div class='columns block'>
+    <mat-form-field class='column' [hideRequiredMarker]='hideRequiredControl.value' [floatLabel]='getFloatLabelValue()'>
+      <input matInput placeholder='Título de la operación' value='{{ApproxData.title}}' formControlName="title"
+        required>
+
+    </mat-form-field>
+  </div>
+
+  <div class='columns block'>
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Variable dependiente</mat-label>
+      <input matInput type='text' placeholder='x0' value='{{ApproxData.dep_var}}' formControlName="dep_var">
+
+    </mat-form-field>
+
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Valor de la variable</mat-label>
+      <input matInput type='number' placeholder='x0 = 0.00' value='{{ApproxData.dep_value}}'
+        formControlName="dep_value">
+
+    </mat-form-field>
+  </div>
+
+  <div class='columns block'>
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Variable independiente</mat-label>
+      <input matInput type='text' placeholder='t0' value='{{ApproxData.ind_var}}' formControlName="ind_var">
+
+    </mat-form-field>
+
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Valor de la variable</mat-label>
+      <input matInput type='number' placeholder='t0 = 0.00' value='{{ApproxData.ind_value}}'
+        formControlName="ind_value">
+
+    </mat-form-field>
+  </div>
+
+  <div class='columns block'>
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Evaluación en</mat-label>
+      <input matInput type='number' placeholder='t = 0.00' value='{{ApproxData.eval_value}}'
+        formControlName="eval_value">
+
+    </mat-form-field>
+  </div>
+
+  <div class='columns block'>
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Función</mat-label>
+      <input matInput type='text' placeholder='f(x0, t0) = x0 + E**(a * t0)' value='{{ApproxData.f}}'
+        formControlName="f">
+
+    </mat-form-field>
+    <mat-form-field class='column' [floatLabel]='getFloatLabelValue()'>
+      <mat-label>Iteraciones</mat-label>
+      <input matInput type='number' placeholder='10...' value='{{ApproxData.N}}' formControlName="N">
+
+    </mat-form-field>
+  </div>
+
+  <!-- <div class='columns block'>
+
+  </div> -->
+
+  <button mat-fab extended color='primary' (click)="updateApproximation(ApproxData.id)">
+    <mat-icon>save</mat-icon>
+    Registrar operación
+  </button>
+
+</form>

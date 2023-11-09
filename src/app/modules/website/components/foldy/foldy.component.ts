@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CreateApprox, ReadApprox } from 'src/app/models/approximation.model';
 
 @Component({
   selector: 'app-foldy',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./foldy.component.css']
 })
 export class FoldyComponent {
+  @Input() wallApprox: ReadApprox | undefined;
   panelOpenState = false;
 }

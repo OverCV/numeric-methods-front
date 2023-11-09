@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ApproxService } from './services/dto/approx.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,12 @@ import { SharedModule } from './modules/shared/shared.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ApproxService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

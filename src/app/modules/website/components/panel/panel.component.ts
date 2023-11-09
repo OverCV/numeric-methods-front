@@ -1,50 +1,68 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-
-
-export interface PeriodicElement {
-  id: number;
-  Approximation: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  { id: 1, Approximation: 'Op. Hydrogen' },
-  { id: 2, Approximation: 'Op. Helium' },
-  { id: 3, Approximation: 'Op. Lithium' },
-  { id: 4, Approximation: 'Op. Beryllium' },
-  { id: 5, Approximation: 'Op. Boron' },
-  { id: 6, Approximation: 'Op. Carbon' },
-  { id: 7, Approximation: 'Op. Nitrogen' },
-  { id: 8, Approximation: 'Op. Oxygen' },
-  { id: 9, Approximation: 'Op. Fluorine' },
-  { id: 10, Approximation: 'Op. Neon' },
-];
+import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core'
+import { MatSort, Sort } from '@angular/material/sort'
+import { MatTableDataSource } from '@angular/material/table'
+import { CreateApprox, ReadApprox } from 'src/app/models/approximation.model'
+import { ApproxService } from 'src/app/services/dto/approx.service'
 
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.css'],
 })
-export class PanelComponent implements AfterViewInit {
-  @ViewChild(MatSort) sort!: MatSort;
+export class PanelComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatSort) sort!: MatSort
+  // @Input() ApproxData: ReadApprox | undefined
 
-  displayedColumns: string[] = ['id', 'Approximation'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  // approxs: ReadApprox[] = []
+
+  displayedColumns: string[] = ['id', 'title']
+  dataSource = new MatTableDataSource()
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
+    private approxService: ApproxService
   ) { }
 
+  ngOnInit(): void {
+    this.getApproximations()
+    //  = this.approxs
+  }
+
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort
+  }
+
+  getApproximations() {
+    // Suscribirse al Observable para obtener las aproximaciones actualizadas
+    this.approxService.approximations$.subscribe(
+      (data: ReadApprox[]) => {
+        this.dataSource.data = data.reverse()
+      }
+    )
+    // Cargar las aproximaciones cuando el componente se inicializa
+    this.approxService.loadApproximations()
+  }
+
+  deleteApproximation(id: number) {
+    console.log('id: ', id)
+    this.approxService.deleteApprox(id).subscribe(
+      (response) => {
+        // La eliminación fue exitosa, la lista se recargará automáticamente
+        this.approxService.loadApproximations()
+      },
+      (error) => {
+        console.error('Error al eliminar la aproximación', error)
+      }
+    )
+    this.approxService.loadApproximations()
   }
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.active} ${sortState.direction}`);
+      this.liveAnnouncer.announce(`Sorted ${sortState.active} ${sortState.direction}`)
     } else {
-      this.liveAnnouncer.announce(`Sorting cleared`);
+      this.liveAnnouncer.announce(`Sorting cleared`)
     }
   }
 }

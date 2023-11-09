@@ -8,6 +8,8 @@ import { E404Component } from './components/E404/e404.component';
 import { SharedModule } from '../shared/shared.module';
 import { FoldyComponent } from './components/foldy/foldy.component';
 import { PanelComponent } from './components/panel/panel.component';
+import { ApproxFormComponent } from './components/approx-form/approx-form.component';
+import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 
 
 @NgModule({
@@ -16,11 +18,13 @@ import { PanelComponent } from './components/panel/panel.component';
     BoardComponent,
     E404Component,
     FoldyComponent,
-    PanelComponent
+    PanelComponent,
+    ApproxFormComponent
   ],
   imports: [
     CommonModule,
     WebsiteRoutingModule,
+    HttpClientModule,
 
     SharedModule
   ]

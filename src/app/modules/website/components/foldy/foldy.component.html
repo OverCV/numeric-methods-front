@@ -1,19 +1,77 @@
-<mat-accordion>
+<mat-accordion *ngIf='wallApprox'>
 
   <mat-expansion-panel hideToggle>
+
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Nueva Operación | Datos operación <!--! Título variable ! {Nueva operación | Datos operación} -->
+
+      <mat-panel-title *ngIf="wallApprox.id > 9">
+        Aproximación {{wallApprox.id}}
       </mat-panel-title>
+      <mat-panel-title *ngIf="wallApprox.id < 10">
+        Aproximación 0{{wallApprox.id}}
+      </mat-panel-title>
+
       <mat-panel-description>
         Acá es posible la creación de nuevas operaciones con Ecuaciones Diferenciales Ordinarias
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <p>This is the primary content of the panel.</p>
+    <div class='columns'>
+      <div class='column'>
+        <app-approx-form [ApproxData]='wallApprox'></app-approx-form>
+      </div>
+
+      <div class='column'>
+        <div class='container is-widescreen block'>
+          <mat-card>
+            <mat-card-content>Constantes</mat-card-content>
+
+            <footer class='card-footer'>
+              <mat-form-field class='column'>
+                <mat-label>Clave</mat-label>
+                <input matInput type='text' placeholder='a, b, ...'>
+              </mat-form-field>
+              <mat-form-field class='column'>
+                <mat-label>Valor</mat-label>
+                <input matInput type='text' placeholder='0.0'>
+              </mat-form-field>
+
+              <a class='card-footer-item'>
+                <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+              </a>
+              <a class='card-footer-item'>
+                <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+              </a>
+            </footer>
+
+            <!--! METER ACÁ EL NGFOR a este FOOTER -->
+
+            <footer class='card-footer'>
+              <mat-form-field class='column'>
+                <mat-label>Clave</mat-label>
+                <input matInput type='text' placeholder='a, b, ...'>
+              </mat-form-field>
+              <mat-form-field class='column'>
+                <mat-label>Valor</mat-label>
+                <input matInput type='text' placeholder='0.0'>
+              </mat-form-field>
+
+              <a class='card-footer-item'>
+                <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+              </a>
+              <a class='card-footer-item'>
+                <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+              </a>
+            </footer>
+
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Aproximaciones
@@ -22,11 +80,18 @@
         Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div class="columns">
-      <div class="image column">Tabla de resultados 01<img src="https://bulma.io/images/placeholders/128x128.png"></div>
-      <div class="image column">Tabla de resultados 02<img src="https://bulma.io/images/placeholders/128x128.png"></div>
-      <div class="image column">Tabla de resultados 03<img src="https://bulma.io/images/placeholders/128x128.png"></div>
+    <!--! HACER ACÁ EL NG-FOR GRAPHS !-->
+    <div class='columns'>
+      <div class='image column'>Método de Euler<img src='https://bulma.io/images/placeholders/128x128.png'></div>
+      <div class='image column'>Metodo Runge-Kutta 4<img src='https://bulma.io/images/placeholders/128x128.png'></div>
+      <div class='image column'>Método RK45<img src='https://bulma.io/images/placeholders/128x128.png'></div>
     </div>
+    <div class='columns'>
+      <div class='image column'>Error de Euler<img src='https://bulma.io/images/placeholders/128x128.png'></div>
+      <div class='image column'>Error Runge-Kutta 4<img src='https://bulma.io/images/placeholders/128x128.png'></div>
+      <div class='image column'>Error RK45<img src='https://bulma.io/images/placeholders/128x128.png'></div>
+    </div>
+
   </mat-expansion-panel>
 
 </mat-accordion>

@@ -10,3 +10,25 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/* Para navegadores basados en WebKit (Chrome, Safari, etc.) */
+html::-webkit-scrollbar {
+    display: none;
+    /* oculta las barras de desplazamiento en WebKit browsers */
+}
+
+
+*,
+*::before,
+*::after {
+    scrollbar-width: none;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para Internet Explorer 10+ */
+}
+
+
+/* *::-webkit-scrollbar {
+    display: none;
+    /* Para Chrome, Safari, y Opera */
+/*} */
