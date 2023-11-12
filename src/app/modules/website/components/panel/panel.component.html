@@ -19,21 +19,25 @@
       </th>
 
       <td mat-cell *matCellDef='let element'>
-        <label class='panel-block column' for=''>{{element.id}}</label>
+        <div class="column">
+          <a href="" class="panel-block"><label class='panel-block column' for=''>{{element.id}}</label></a>
+        </div>
       </td>
     </ng-container>
 
     <!-- Approximation Column -->
     <ng-container matColumnDef='title'>
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription='Sort'>
+
         <a class='panel-block'>
           <mat-icon fontIcon='calculate' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-          Approximation
+          <label for="">Título</label>
         </a>
       </th>
 
       <td mat-cell *matCellDef='let element'>
-        <div class='column'>
+        <div class="column">
+
           <a class='panel-block' (click)='deleteApproximation(element.id)'>
             <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
             <label>{{element.title}}</label>
