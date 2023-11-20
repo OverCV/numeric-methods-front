@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { CreateApprox, ReadApprox, UpdateApprox } from 'src/app/models/approximation.model'
+import { CreateApprox, ReadApprox as ReadedApproxs, UpdateApprox } from 'src/app/models/approximation.model'
 import { ApproxService } from 'src/app/services/dto/approx.service'
 import { Subscription } from 'rxjs'
 
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./wall.component.css']
 })
 export class WallComponent implements OnInit, OnDestroy {
-  approxs: ReadApprox[] = []
+  approxs: ReadedApproxs[] = []
   private dataSubscription!: Subscription
 
   // approx: BaseApproximation | null = null
@@ -29,8 +29,8 @@ export class WallComponent implements OnInit, OnDestroy {
   getApproximations() {
     // Suscribirse al Observable para obtener las aproximaciones actualizadas
     this.approxService.approximations$.subscribe(
-      (data: ReadApprox[]) => {
-        this.approxs = data.reverse()
+      (data: ReadedApproxs[]) => {
+        this.approxs = data
       }
     )
     // Cargar las aproximaciones cuando el componente se inicializa

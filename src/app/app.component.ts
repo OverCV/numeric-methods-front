@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     // Suscribirse al Observable para obtener las aproximaciones actualizadas
     this.approxService.approximations$.subscribe(
       (data: ReadApprox[]) => {
-        this.approxs = data.reverse()
+        this.approxs = data
       }
     )
 

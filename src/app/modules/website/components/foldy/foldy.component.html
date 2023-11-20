@@ -4,10 +4,10 @@
 
     <mat-expansion-panel-header>
 
-      <mat-panel-title *ngIf="wallApprox.id > 9">
+      <mat-panel-title *ngIf='wallApprox.id > 9'>
         Aproximación {{wallApprox.id}}
       </mat-panel-title>
-      <mat-panel-title *ngIf="wallApprox.id < 10">
+      <mat-panel-title *ngIf='wallApprox.id < 10'>
         Aproximación 0{{wallApprox.id}}
       </mat-panel-title>
 
@@ -71,27 +71,61 @@
 
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Aproximaciones
-      </mat-panel-title>
-      <mat-panel-description>
-        Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <!--! HACER ACÁ EL NG-FOR GRAPHS !-->
-    <div class='columns'>
-      <div class='image column'>Método de Euler<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-      <div class='image column'>Metodo Runge-Kutta 4<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-      <div class='image column'>Método RK45<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-    </div>
-    <div class='columns'>
-      <div class='image column'>Error de Euler<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-      <div class='image column'>Error Runge-Kutta 4<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-      <div class='image column'>Error RK45<img src='https://bulma.io/images/placeholders/128x128.png'></div>
-    </div>
+  <br>
 
-  </mat-expansion-panel>
+  <div class="columns">
+    <div class="column">
+      <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
+        <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
+          <mat-panel-title>
+            Aproximaciones
+          </mat-panel-title>
+          <mat-panel-description>
+            Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class='columns'>
+          <div *ngFor='let gp of graphs' class='column'>
+            <h3>Método de {{gp.title}}</h3>
+            <div class='image is-4by3 columns'>
+              <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
+            </div>
+            <h3>Error de {{gp.title}}</h3>
+            <div class='image is-4by3 columns'>
+              <img src='{{routeImages}}/{{gp.error_url}}' alt='{{gp.error_url}}'>
+            </div>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+    <div class="column">
+      <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
+        <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
+          <mat-panel-title>
+            Aproximaciones
+          </mat-panel-title>
+          <mat-panel-description>
+            Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class='columns'>
+          <div *ngFor='let gp of graphs' class='column'>
+            <h3>Método de {{gp.title}}</h3>
+            <div class='image is-4by3 columns'>
+              <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
+            </div>
+            <h3>Error de {{gp.title}}</h3>
+            <div class='image is-4by3 columns'>
+              <img src='{{routeImages}}/{{gp.error_url}}' alt='{{gp.error_url}}'>
+            </div>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+  </div>
 
 </mat-accordion>

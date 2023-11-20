@@ -37,7 +37,7 @@ export class PanelComponent implements AfterViewInit, OnInit {
     // Suscribirse al Observable para obtener las aproximaciones actualizadas
     this.approxService.approximations$.subscribe(
       (data: ReadApprox[]) => {
-        this.dataSource.data = data.reverse()
+        this.dataSource.data = data
       }
     )
     // Cargar las aproximaciones cuando el componente se inicializa

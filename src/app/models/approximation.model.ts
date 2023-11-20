@@ -1,3 +1,6 @@
+import { ReadGraph } from './graph.model'
+import { ReadConstant } from './constant.model'
+
 export interface BaseApproximation {
     title: string
     f: string
@@ -23,6 +26,6 @@ export interface ReadApprox extends BaseApproximation {
     f: string
     id: number
 
-    // constants: List[ConstantRead] = []
-    // graphs: List[GraphRead] = []
+    graphs: ReadGraph[]
+    constants: ReadConstant[]
 }
