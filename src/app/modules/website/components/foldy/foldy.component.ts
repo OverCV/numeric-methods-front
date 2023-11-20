@@ -4,6 +4,7 @@ import { GenericResponse } from 'src/app/models/generic.response.model';
 import { ReadGraph } from 'src/app/models/graph.model';
 import { ApproxService } from 'src/app/services/dto/approx.service';
 import { environment } from 'src/app/environment/env.local';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-foldy',
@@ -16,12 +17,20 @@ export class FoldyComponent {
   graphs: ReadGraph[] = []
   routeImages: string
 
+  isLoading: boolean = false
+
   constructor(
-    private approxGraphService: ApproxService
+    private approxGraphService: ApproxService,
+    private _snackBar: MatSnackBar
   ) {
     this.routeImages = environment.server
   }
 
+  openSnackBar(message: string, action: string, durationInSeconds: number) {
+    this._snackBar.open(message, action, {
+      duration: durationInSeconds * 1000,
+    });
+  }
 
   getGraphs(id: number) {
     this.approxGraphService.readApproxGraphs(id).subscribe(
@@ -36,5 +45,24 @@ export class FoldyComponent {
     )
   }
 
+  solveApproximation(id: number) {
+    this.isLoading = true
+    this.approxGraphService.solveApproximation(id).subscribe(
+      (response: GenericResponse<number>) => {
+        if (response && response.data) {
+          let message: string = `Approximation ${this.wallApprox?.title} solved!`
+          this.openSnackBar(
+            message,
+            'Cerrar',
+            1.4
+          )
+          this.isLoading = false
+        }
+      },
+      (error) => {
+        console.error('Error al cargar las gráficas', error)
+      }
+    )
+  }
 
 }

@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input'
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatRadioModule,
     MatInputModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class SharedModule { }

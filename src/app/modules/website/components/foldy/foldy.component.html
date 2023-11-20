@@ -64,68 +64,71 @@
               </a>
             </footer>
 
+            <button (click)='solveApproximation(wallApprox.id)' mat-fab extended color='primary'>
+              <mat-icon>functions</mat-icon>
+              Resolver Aproximación
+            </button>
+
+
           </mat-card>
+        </div>
+        <br>
+        <div *ngIf="isLoading" class="columns is-centered">
+          <mat-progress-spinner class="center" [color]="'accent'" [mode]="'indeterminate'">
+          </mat-progress-spinner>
         </div>
       </div>
     </div>
 
   </mat-expansion-panel>
 
-  <br>
+  <!-- <br> -->
 
-  <div class="columns">
-    <div class="column">
-      <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
-        <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
-          <mat-panel-title>
-            Aproximaciones
-          </mat-panel-title>
-          <mat-panel-description>
-            Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+  <!-- <div class='columns'> -->
+  <!-- <div class='column'> -->
+  <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
+    <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
+      <mat-panel-title>
+        Aproximaciones
+      </mat-panel-title>
+      <mat-panel-description>
+        Cliquea aquí para {{panelOpenState ? 'cerrar resultados 🔒' : 'visualizar resultados 👈'}}
+      </mat-panel-description>
+      <!-- <mat-panel-description class='is-right'>
+        <mat-icon class='is-right'>map</mat-icon>
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
 
-        <div class='columns'>
-          <div *ngFor='let gp of graphs' class='column'>
-            <h3>Método de {{gp.title}}</h3>
-            <div class='image is-4by3 columns'>
-              <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
-            </div>
-            <h3>Error de {{gp.title}}</h3>
-            <div class='image is-4by3 columns'>
-              <img src='{{routeImages}}/{{gp.error_url}}' alt='{{gp.error_url}}'>
-            </div>
-          </div>
+    <div class='columns'>
+      <div *ngFor='let gp of graphs' class='column'>
+        <!-- <mat-expansion-panel>
+          <mat-expansion-panel-header>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel> -->
+
+        <!-- Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}} -->
+        <h3>Método de {{gp.title}}</h3>
+        <div class='image is-4by3 columns'>
+          <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
         </div>
 
-      </mat-expansion-panel>
-    </div>
-    <div class="column">
-      <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
-        <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
-          <mat-panel-title>
-            Aproximaciones
-          </mat-panel-title>
-          <mat-panel-description>
-            Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+        <!-- <h3></h3> -->
 
-        <div class='columns'>
-          <div *ngFor='let gp of graphs' class='column'>
-            <h3>Método de {{gp.title}}</h3>
-            <div class='image is-4by3 columns'>
-              <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
-            </div>
-            <h3>Error de {{gp.title}}</h3>
-            <div class='image is-4by3 columns'>
-              <img src='{{routeImages}}/{{gp.error_url}}' alt='{{gp.error_url}}'>
-            </div>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <h3></h3>
+            Error de {{gp.title}}
+          </mat-expansion-panel-header>
+          <div class='image is-4by3 columns'>
+            <img src='{{routeImages}}/{{gp.error_url}}' alt='{{gp.error_url}}'>
           </div>
-        </div>
+        </mat-expansion-panel>
 
-      </mat-expansion-panel>
+      </div>
     </div>
-  </div>
+
+
+
+  </mat-expansion-panel>
 
 </mat-accordion>

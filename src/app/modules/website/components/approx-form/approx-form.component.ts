@@ -29,7 +29,7 @@ export class ApproxFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(`Approximation data: ${this.ApproxData}`)
+    // console.log(`Approximation data: ${this.ApproxData}`)
     this.formData = this.initForm(this.ApproxData)
   }
 

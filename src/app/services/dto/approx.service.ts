@@ -92,7 +92,7 @@ export class ApproxService {
   updateApprox(id: number, data: UpdateApprox): Observable<GenericResponse<ReadApprox>> {
     return this.http.put<GenericResponse<ReadApprox>>(`${this.server}/${id}`, data).pipe(
       tap(() => {
-        this.loadApproximations() // Recargar las aproximaciones después de actualizar
+        this.loadApproximations()
       })
     )
   }
@@ -107,6 +107,10 @@ export class ApproxService {
   }
 
   /* Business Logic */
+
+  solveApproximation(id: number): Observable<GenericResponse<number>> {
+    return this.http.get<GenericResponse<number>>(`${this.server}/${id}/solve`)
+  }
 
   readApproxGraphs(id: number): Observable<GenericResponse<ReadGraph[]>> {
     return this.http.get<GenericResponse<ReadGraph[]>>(`${this.server}/${id}/graphs`)
