@@ -53,23 +53,23 @@ export class ApproxFormComponent implements OnInit {
     })
   }
 
-  saveApproximation(id: number, approx: CreateApprox) {
-    // Check for the validators
-    if (this.formData.invalid) {
-      console.log('Form is not valid')
-      return
-    }
-    console.log(`Saving approximation with id ${id}`)
+  // saveApproximation(id: number, approx: CreateApprox) {
+  //   // Check for the validators
+  //   if (this.formData.invalid) {
+  //     console.log('Form is not valid')
+  //     return
+  //   }
+  //   console.log(`Saving approximation with id ${id}`)
 
-    // this.service.updateApprox(id, approx).subscribe(
-    //   (res) => {
-    //     console.log(res)
-    //     // this.approxs()
-    //     console.log(`Done updating approximation with id ${id}`)
-    //   },
-    //   (err) => { console.log(err) }
-    // )
-  }
+  //   // this.service.updateApprox(id, approx).subscribe(
+  //   //   (res) => {
+  //   //     console.log(res)
+  //   //     // this.approxs()
+  //   //     console.log(`Done updating approximation with id ${id}`)
+  //   //   },
+  //   //   (err) => { console.log(err) }
+  //   // )
+  // }
 
   updateApproximation(id_approx: number) {
     if (this.formData.invalid) {
@@ -89,17 +89,17 @@ export class ApproxFormComponent implements OnInit {
       h: 0,
       N: approxFormData.N,
     }
-    console.log(`Updating approximation for: ${approx}`)
-    if (id_approx) {
+    console.log(`Updating approximation with id ${id_approx} with data: ${JSON.stringify(approx)}`)
+    if (id_approx && id_approx > 0) {
       this.approxService.updateApprox(id_approx, approx).subscribe(
         (response) => {
-          // La actualización fue exitosa, la lista se recargará automáticamente
-          this.approxService.loadApproximations();
+          // Si la creación fue exitosa, recargar la lista de aproximaciones
+          this.approxService.loadApproximations()
         },
         (error) => {
-          console.error('Error al actualizar la aproximación', error);
+          console.error('Error al actualizar la aproximación', error)
         }
-      );
+      )
     }
   }
 

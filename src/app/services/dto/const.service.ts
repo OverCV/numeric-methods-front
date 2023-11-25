@@ -38,15 +38,29 @@ export class ConstService {
     return this.http.get<GenericResponse<ConstantResponse[]>>(`${this.server}/all`)
   }
 
+  readConst(id_approx: number | undefined): Observable<GenericResponse<ConstantResponse>> {
+    if (!id_approx) {
+      return new Observable<GenericResponse<ConstantResponse>>()
+    }
+    return this.http.get<GenericResponse<ConstantResponse>>(`${this.server}/by_approx/${id_approx}`)
+  }
+
   createConst(approx_id: number, constant: CreateConstant): Observable<GenericResponse<ConstantResponse>> {
     return this.http.post<GenericResponse<ConstantResponse>>(`${this.server}/post/${approx_id}`, constant)
   }
 
   updateConst(id: number, constant: CreateConstant): Observable<GenericResponse<ConstantResponse>> {
-    return this.http.put<GenericResponse<ConstantResponse>>(`${this.server}/put/${id}`, constant)
+    // return this.http.put<GenericResponse<ConstantResponse>>(`${this.server}/put/${id}`, constant)
+    return this.http.put<GenericResponse<ConstantResponse>>(`${this.server}/put/${id}`, constant).
+      pipe(tap(() => {
+        this.loadConstants() // Recargar las aproximaciones después de actualizar
+      }))
   }
 
   deleteConst(id: number): Observable<GenericResponse<ConstantResponse>> {
-    return this.http.delete<GenericResponse<ConstantResponse>>(`${this.server}/delete/${id}`)
+    return this.http.delete<GenericResponse<ConstantResponse>>(`${this.server}/delete/${id}`).
+      pipe(tap(() => {
+        this.loadConstants() // Recargar las aproximaciones después de eliminar
+      }))
   }
 }

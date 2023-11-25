@@ -9,7 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FoldyComponent } from './components/foldy/foldy.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { ApproxFormComponent } from './components/approx-form/approx-form.component';
-import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
+import { ConstFormComponent } from './components/const-form/const-form.component'; // Importa HttpClientModule
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientMo
     E404Component,
     FoldyComponent,
     PanelComponent,
-    ApproxFormComponent
+    ApproxFormComponent,
+    ConstFormComponent
   ],
   imports: [
     CommonModule,

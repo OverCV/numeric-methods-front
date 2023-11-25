@@ -4,7 +4,7 @@
   </mat-checkbox> -->
 
   <div class='columns block'>
-    <mat-form-field class='column' [hideRequiredMarker]='hideRequiredControl.value' [floatLabel]='getFloatLabelValue()'>
+    <mat-form-field class='column is-fluid' [hideRequiredMarker]='hideRequiredControl.value' [floatLabel]='getFloatLabelValue()'>
       <input matInput placeholder='Título de la operación' value='{{ApproxData.title}}' formControlName="title"
         required>
 
@@ -68,9 +68,9 @@
 
   </div> -->
 
-  <button mat-fab extended color='primary' (click)="updateApproximation(ApproxData.id)">
+  <a mat-fab extended color='primary' (click)="updateApproximation(ApproxData.id)">
     <mat-icon>save</mat-icon>
     Registrar operación
-  </button>
+  </a>
 
 </form>

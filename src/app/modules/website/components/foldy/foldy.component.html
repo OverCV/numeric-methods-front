@@ -17,6 +17,7 @@
     </mat-expansion-panel-header>
 
     <div class='columns'>
+
       <div class='column'>
         <app-approx-form [ApproxData]='foldyApprox'></app-approx-form>
       </div>
@@ -27,27 +28,8 @@
             <mat-card-content>Constantes</mat-card-content>
             <br>
 
-            
-            
             <aside *ngFor="let cte of consts">
-              <footer class='card-footer'>
-                <mat-form-field class='column'>
-                  <mat-label>Clave</mat-label>
-                  <input matInput type='text' placeholder='a, b, ...' value={{cte.name}}>
-                </mat-form-field>
-                <mat-form-field class='column'>
-                  <mat-label>Valor</mat-label>
-                  <input matInput type='text' placeholder='0.0' value={{cte.value}}>
-                </mat-form-field>
-
-                <a  class='card-footer-item'> <!--! (click)='updateConst(cte.id)' -->
-                  <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-                </a>
-                <a class='card-footer-item'> <!--! (click)='deleteConst(cte.id)' -->
-                  <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-                </a>
-              </footer>
-
+              <app-const-form [constData]="cte" [approx_id]="foldyApprox.id" ></app-const-form>
             </aside>
 
             <div class="notification">

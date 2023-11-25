@@ -88,20 +88,17 @@ export class ApproxService {
   }
 
   updateApprox(id: number, data: UpdateApprox): Observable<GenericResponse<ApproxResponse>> {
-    return this.http.put<GenericResponse<ApproxResponse>>(`${this.server}/put/${id}`, data).pipe(
-      tap(() => {
+    return this.http.put<GenericResponse<ApproxResponse>>(`${this.server}/put/${id}`, data).
+      pipe(tap(() => {
         this.loadApproximations()
-      })
-    )
+      }))
   }
 
   deleteApprox(id: number): Observable<GenericResponse<ApproxResponse>> {
-    return this.http.delete<GenericResponse<ApproxResponse>>(`${this.server}/patch/${id}`).
-      pipe(
-        tap(() => {
-          this.loadApproximations() // Recargar las aproximaciones después de eliminar
-        })
-      )
+    return this.http.delete<GenericResponse<ApproxResponse>>(`${this.server}/delete/${id}`).
+      pipe(tap(() => {
+        this.loadApproximations() // Recargar las aproximaciones después de eliminar
+      }))
   }
 
   /* Business Logic */
@@ -114,7 +111,10 @@ export class ApproxService {
     return this.http.get<GenericResponse<ReadGraph[]>>(`${this.server}/${id}/graphs`)
   }
 
-  readApproxConsts(id: number): Observable<GenericResponse<ConstantResponse[]>> {
+  readApproxConsts(id: number | undefined): Observable<GenericResponse<ConstantResponse[]>> {
+    if (!id) {
+      return new Observable<GenericResponse<ConstantResponse[]>>()
+    }
     return this.http.get<GenericResponse<ConstantResponse[]>>(`${this.server}/${id}/consts`)
   }
 }

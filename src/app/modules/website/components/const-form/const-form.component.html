@@ -1,0 +1,17 @@
+<footer *ngIf='constData' [formGroup]='formData' class='card-footer'>
+  <mat-form-field class='column'>
+    <mat-label>Clave</mat-label>
+    <input matInput formControlName="name" type='text' placeholder='a, b, ...' value={{constData.name}}>
+  </mat-form-field>
+  <mat-form-field class='column'>
+    <mat-label>Valor</mat-label>
+    <input matInput formControlName="value" type='text' placeholder='0.0' value={{constData.value}}>
+  </mat-form-field>
+
+  <a (click)="updateConstant(constData.id)" class='card-footer-item'>
+    <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+  </a>
+  <a (click)="deleteConstant(constData.id)" class='card-footer-item'>
+    <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+  </a>
+</footer>

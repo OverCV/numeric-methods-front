@@ -24,8 +24,6 @@ export class FoldyComponent {
 
   isLoading: boolean = false
 
-  // formData: FormGroup
-
 
   constructor(
     private approxService: ApproxService,
@@ -33,7 +31,6 @@ export class FoldyComponent {
     private _snackBar: MatSnackBar
   ) {
     this.routeImages = environment.server
-    // this.formData = this.initForm(this.cons)
   }
 
   openSnackBar(message: string, action: string, durationInSeconds: number) {
@@ -85,6 +82,7 @@ export class FoldyComponent {
       (error) => {
         let message: string = `Error al cargar las gráficas` + error
         this.openSnackBar(message, 'O-oh..', 1.4)
+        this.isLoading = false
       }
     )
   }
@@ -106,32 +104,8 @@ export class FoldyComponent {
     )
   }
 
-  updateConstant(id: number, constant: UpdateConstant, approx_id: number) {
-    
-    
-    this.constService.updateConst(id, constant).subscribe(
-      (response) => {
-        // Si la creación fue exitosa, recargar la lista de constantes
-        this.constService.loadConstants()
-        this.getConsts(approx_id)
-      },
-      (error) => {
-        console.error('Error al actualizar la constante', error)
-      }
-    )
-  }
 
-  deleteConstant(id: number, approx_id: number) {
-    this.constService.deleteConst(id).subscribe(
-      (response) => {
-        // Si la creación fue exitosa, recargar la lista de constantes
-        this.constService.loadConstants()
-        this.getConsts(approx_id)
-      },
-      (error) => {
-        console.error('Error al eliminar la constante', error)
-      }
-    )
-  }
+
+
 
 }
