@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject, tap } from 'rxjs'
-import { CreateApprox, ReadApprox, UpdateApprox } from 'src/app/models/approximation.model'
+import { CreateApprox, ApproxResponse, UpdateApprox } from 'src/app/models/approximation.model'
 import { GenericResponse } from 'src/app/models/generic.response.model'
 import { environment } from 'src/app/environment/env.local'
-import { ReadConstant } from 'src/app/models/constant.model'
+import { ConstantResponse } from 'src/app/models/constant.model'
 import { ReadGraph } from 'src/app/models/graph.model'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApproxService {
-
-
-  private approximationsSource = new BehaviorSubject<ReadApprox[]>([])
-  approximations$: Observable<ReadApprox[]>
+  private approximationsSource = new BehaviorSubject<ApproxResponse[]>([])
+  approximations$: Observable<ApproxResponse[]>
     = this.approximationsSource.asObservable()
 
   // private graphsSource = new BehaviorSubject<ReadGraph[]>([])
@@ -33,12 +31,12 @@ export class ApproxService {
 
   /* Data reload */
 
-  updateApproximations(approxs: ReadApprox[]) {
+  updateApproximations(approxs: ApproxResponse[]) {
     this.approximationsSource.next(approxs)
   }
   loadApproximations() {
     this.readApproxs().subscribe(
-      (response: GenericResponse<ReadApprox[]>) => {
+      (response: GenericResponse<ApproxResponse[]>) => {
         this.updateApproximations(response.data)
       },
       error => {
@@ -77,28 +75,28 @@ export class ApproxService {
 
   /* CRUD OPS */
 
-  createApprox(data: CreateApprox): Observable<GenericResponse<ReadApprox>> {
-    return this.http.post<GenericResponse<ReadApprox>>(`${this.server}`, data)
+  createApprox(data: CreateApprox): Observable<GenericResponse<ApproxResponse>> {
+    return this.http.post<GenericResponse<ApproxResponse>>(`${this.server}/post`, data)
   }
 
-  readApproxs(): Observable<GenericResponse<ReadApprox[]>> {
-    return this.http.get<GenericResponse<ReadApprox[]>>(`${this.server}`)
+  readApproxs(): Observable<GenericResponse<ApproxResponse[]>> {
+    return this.http.get<GenericResponse<ApproxResponse[]>>(`${this.server}/all`)
   }
 
-  readApproxById(id: number): Observable<GenericResponse<ReadApprox>> {
-    return this.http.get<GenericResponse<ReadApprox>>(`${this.server}/approx/${id}`)
+  readApproxById(id: number): Observable<GenericResponse<ApproxResponse>> {
+    return this.http.get<GenericResponse<ApproxResponse>>(`${this.server}/by_id/${id}`)
   }
 
-  updateApprox(id: number, data: UpdateApprox): Observable<GenericResponse<ReadApprox>> {
-    return this.http.put<GenericResponse<ReadApprox>>(`${this.server}/${id}`, data).pipe(
+  updateApprox(id: number, data: UpdateApprox): Observable<GenericResponse<ApproxResponse>> {
+    return this.http.put<GenericResponse<ApproxResponse>>(`${this.server}/put/${id}`, data).pipe(
       tap(() => {
         this.loadApproximations()
       })
     )
   }
 
-  deleteApprox(id: number): Observable<GenericResponse<ReadApprox>> {
-    return this.http.delete<GenericResponse<ReadApprox>>(`${this.server}/${id}`).
+  deleteApprox(id: number): Observable<GenericResponse<ApproxResponse>> {
+    return this.http.delete<GenericResponse<ApproxResponse>>(`${this.server}/patch/${id}`).
       pipe(
         tap(() => {
           this.loadApproximations() // Recargar las aproximaciones después de eliminar
@@ -116,7 +114,7 @@ export class ApproxService {
     return this.http.get<GenericResponse<ReadGraph[]>>(`${this.server}/${id}/graphs`)
   }
 
-  readApproxConsts(id: number): Observable<GenericResponse<ReadConstant[]>> {
-    return this.http.get<GenericResponse<ReadConstant[]>>(`${this.server}/${id}/consts`)
+  readApproxConsts(id: number): Observable<GenericResponse<ConstantResponse[]>> {
+    return this.http.get<GenericResponse<ConstantResponse[]>>(`${this.server}/${id}/consts`)
   }
 }

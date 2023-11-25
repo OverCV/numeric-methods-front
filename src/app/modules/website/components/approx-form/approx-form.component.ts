@@ -5,7 +5,7 @@ import {
   FormBuilder, FormControl, FormGroup, Validators
 } from '@angular/forms'
 import { FloatLabelType } from '@angular/material/form-field'
-import { CreateApprox, ReadApprox } from 'src/app/models/approximation.model'
+import { CreateApprox, ApproxResponse } from 'src/app/models/approximation.model'
 import { ApproxService } from 'src/app/services/dto/approx.service'
 
 @Component({
@@ -14,10 +14,10 @@ import { ApproxService } from 'src/app/services/dto/approx.service'
   styleUrls: ['./approx-form.component.css'],
 })
 export class ApproxFormComponent implements OnInit {
-  @Input() ApproxData: ReadApprox | undefined
+  @Input() ApproxData: ApproxResponse | undefined
 
-  approxs: ReadApprox[] = []
-  app_id: number | undefined
+  approxs: ApproxResponse[] = []
+  // approx_id: number | undefined
 
   hideRequiredControl = new FormControl(false)
   floatLabelControl = new FormControl('auto' as FloatLabelType)
@@ -33,7 +33,7 @@ export class ApproxFormComponent implements OnInit {
     this.formData = this.initForm(this.ApproxData)
   }
 
-  initForm(initData: ReadApprox | undefined): FormGroup {
+  initForm(initData: ApproxResponse | undefined): FormGroup {
     return this.formBuilder.group({
       hideRequired: this.hideRequiredControl,
       floatLabel: this.floatLabelControl,

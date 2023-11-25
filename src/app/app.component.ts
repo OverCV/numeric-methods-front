@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApproxService } from './services/dto/approx.service';
-import { ReadApprox } from './models/approximation.model';
+import { ApproxResponse } from './models/approximation.model';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ReadApprox } from './models/approximation.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  approxs: ReadApprox[] = []
+  approxs: ApproxResponse[] = []
 
   constructor(
     private approxService: ApproxService
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   getApproximations() {
     // Suscribirse al Observable para obtener las aproximaciones actualizadas
     this.approxService.approximations$.subscribe(
-      (data: ReadApprox[]) => {
+      (data: ApproxResponse[]) => {
         this.approxs = data
       }
     )

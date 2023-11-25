@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatSort, Sort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { CreateApprox, ReadApprox } from 'src/app/models/approximation.model'
+import { CreateApprox, ApproxResponse } from 'src/app/models/approximation.model'
 import { ApproxService } from 'src/app/services/dto/approx.service'
 
 @Component({
@@ -36,7 +36,7 @@ export class PanelComponent implements AfterViewInit, OnInit {
   getApproximations() {
     // Suscribirse al Observable para obtener las aproximaciones actualizadas
     this.approxService.approximations$.subscribe(
-      (data: ReadApprox[]) => {
+      (data: ApproxResponse[]) => {
         this.dataSource.data = data
       }
     )

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { CreateApprox, ReadApprox as ReadedApproxs, UpdateApprox } from 'src/app/models/approximation.model'
+import { CreateApprox, ApproxResponse as ReadedApproxs, UpdateApprox } from 'src/app/models/approximation.model'
 import { ApproxService } from 'src/app/services/dto/approx.service'
 import { Subscription } from 'rxjs'
 

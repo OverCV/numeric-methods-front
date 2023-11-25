@@ -1,14 +1,14 @@
 
-export interface BaseConstant {
+export interface RequestConstant {
   name: string
   value: number
 }
 
-export interface CreateConstant extends BaseConstant { }
+export interface CreateConstant extends RequestConstant { }
 
-export interface UpdateConstant extends BaseConstant { }
+export interface UpdateConstant extends RequestConstant { }
 
-export interface ReadConstant extends BaseConstant {
+export interface ConstantResponse extends RequestConstant {
   id: number
   approximation_id: number
 }

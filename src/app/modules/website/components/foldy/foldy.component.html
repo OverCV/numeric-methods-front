@@ -1,14 +1,14 @@
-<mat-accordion *ngIf='wallApprox'>
+<mat-accordion *ngIf='foldyApprox'>
 
   <mat-expansion-panel hideToggle>
 
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header (click)='getConsts(foldyApprox.id)'>
 
-      <mat-panel-title *ngIf='wallApprox.id > 9'>
-        Aproximación {{wallApprox.id}}
+      <mat-panel-title *ngIf='foldyApprox.id > 9'>
+        Aproximación {{foldyApprox.id}}
       </mat-panel-title>
-      <mat-panel-title *ngIf='wallApprox.id < 10'>
-        Aproximación 0{{wallApprox.id}}
+      <mat-panel-title *ngIf='foldyApprox.id < 10'>
+        Aproximación 0{{foldyApprox.id}}
       </mat-panel-title>
 
       <mat-panel-description>
@@ -18,58 +18,49 @@
 
     <div class='columns'>
       <div class='column'>
-        <app-approx-form [ApproxData]='wallApprox'></app-approx-form>
+        <app-approx-form [ApproxData]='foldyApprox'></app-approx-form>
       </div>
 
       <div class='column'>
         <div class='container is-widescreen block'>
           <mat-card>
             <mat-card-content>Constantes</mat-card-content>
+            <br>
 
-            <footer class='card-footer'>
-              <mat-form-field class='column'>
-                <mat-label>Clave</mat-label>
-                <input matInput type='text' placeholder='a, b, ...'>
-              </mat-form-field>
-              <mat-form-field class='column'>
-                <mat-label>Valor</mat-label>
-                <input matInput type='text' placeholder='0.0'>
-              </mat-form-field>
+            
+            
+            <aside *ngFor="let cte of consts">
+              <footer class='card-footer'>
+                <mat-form-field class='column'>
+                  <mat-label>Clave</mat-label>
+                  <input matInput type='text' placeholder='a, b, ...' value={{cte.name}}>
+                </mat-form-field>
+                <mat-form-field class='column'>
+                  <mat-label>Valor</mat-label>
+                  <input matInput type='text' placeholder='0.0' value={{cte.value}}>
+                </mat-form-field>
 
-              <a class='card-footer-item'>
-                <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-              </a>
-              <a class='card-footer-item'>
-                <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-              </a>
-            </footer>
+                <a  class='card-footer-item'> <!--! (click)='updateConst(cte.id)' -->
+                  <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+                </a>
+                <a class='card-footer-item'> <!--! (click)='deleteConst(cte.id)' -->
+                  <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+                </a>
+              </footer>
 
-            <!--! METER ACÁ EL NGFOR a este FOOTER -->
+            </aside>
 
-            <footer class='card-footer'>
-              <mat-form-field class='column'>
-                <mat-label>Clave</mat-label>
-                <input matInput type='text' placeholder='a, b, ...'>
-              </mat-form-field>
-              <mat-form-field class='column'>
-                <mat-label>Valor</mat-label>
-                <input matInput type='text' placeholder='0.0'>
-              </mat-form-field>
-
-              <a class='card-footer-item'>
-                <mat-icon fontIcon='save' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-              </a>
-              <a class='card-footer-item'>
-                <mat-icon fontIcon='delete' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-              </a>
-            </footer>
-
-            <button (click)='solveApproximation(wallApprox.id)' mat-fab extended color='primary'>
-              <mat-icon>functions</mat-icon>
-              Resolver Aproximación
-            </button>
-
-
+            <div class="notification">
+              <div class="buttons">
+                <button (click)="addConstant(foldyApprox.id)" mat-fab class='button notification is-link is-light'>
+                  <mat-icon fontIcon='add' aria-hidden='false' aria-label='Material Icon'></mat-icon>
+                </button>
+                <button (click)='solveApproximation(foldyApprox.id)' mat-fab extended color='primary'>
+                  <mat-icon>functions</mat-icon>
+                  Resolver Aproximación
+                </button>
+              </div>
+            </div>
           </mat-card>
         </div>
         <br>
@@ -87,7 +78,7 @@
   <!-- <div class='columns'> -->
   <!-- <div class='column'> -->
   <mat-expansion-panel (opened)='panelOpenState = true' (closed)='panelOpenState = false'>
-    <mat-expansion-panel-header (click)='getGraphs(wallApprox.id)'>
+    <mat-expansion-panel-header (click)='getGraphs(foldyApprox.id)'>
       <mat-panel-title>
         Aproximaciones
       </mat-panel-title>
@@ -107,7 +98,7 @@
         </mat-expansion-panel> -->
 
         <!-- Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}} -->
-        <h3>Método de {{gp.title}}</h3>
+        <h3>Método de {{gp.title}}: {{gp.solution}}</h3>
         <div class='image is-4by3 columns'>
           <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
         </div>

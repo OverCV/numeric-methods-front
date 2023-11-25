@@ -8,6 +8,8 @@ Luego el proyecto (mejor con ruteo ya hecho)
 ng new <frontend>
 ```
 
+Si el proyecto ya está generado entonces sólo hacer uso de `npm i` para instalar las dependencias.
+
 Se accede a la carpeta del proyecto `cd <frontend>`.
 
 ## NG Material
@@ -55,4 +57,4 @@ ng generate module modules/shared --module=app
 ```
 Con el fin de tener allí los componentes que se usen en toda la aplicación.
 Ahora los instalamos en el `app.module.ts`:
-```typescript
+
