@@ -2,7 +2,7 @@
 
   <mat-expansion-panel hideToggle>
 
-    <mat-expansion-panel-header (click)='getConsts(foldyApprox.id)'>
+    <mat-expansion-panel-header (click)='getConsts(foldyApprox.id)' class="p-4">
 
       <mat-panel-title *ngIf='foldyApprox.id > 9'>
         Aproximación {{foldyApprox.id}}
@@ -11,8 +11,19 @@
         Aproximación 0{{foldyApprox.id}}
       </mat-panel-title>
 
-      <mat-panel-description>
-        Acá es posible la creación de nuevas operaciones con Ecuaciones Diferenciales Ordinarias
+      <mat-panel-description class="m-4">
+        <div class="columns">
+          <div class="column is-mo">
+            Espacio para creación de Ecuaciones Diferenciales Ordinarias
+          </div>
+          <div class="column">
+            <button (click)='solveApproximation(foldyApprox.id)' mat-fab extended color='is-light'>
+              <mat-icon color="primary">functions</mat-icon>
+              Resolver Aproximación
+            </button>
+          </div>
+        </div>
+
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -29,17 +40,13 @@
             <br>
 
             <aside *ngFor="let cte of consts">
-              <app-const-form [constData]="cte" [approx_id]="foldyApprox.id" ></app-const-form>
+              <app-const-form [constData]="cte" [approx_id]="foldyApprox.id"></app-const-form>
             </aside>
 
             <div class="notification">
               <div class="buttons">
                 <button (click)="addConstant(foldyApprox.id)" mat-fab class='button notification is-link is-light'>
                   <mat-icon fontIcon='add' aria-hidden='false' aria-label='Material Icon'></mat-icon>
-                </button>
-                <button (click)='solveApproximation(foldyApprox.id)' mat-fab extended color='primary'>
-                  <mat-icon>functions</mat-icon>
-                  Resolver Aproximación
                 </button>
               </div>
             </div>
@@ -80,7 +87,9 @@
         </mat-expansion-panel> -->
 
         <!-- Cliquea aquí para {{panelOpenState ? 'cerrar resultados' : 'visualizar resultados'}} -->
-        <h3>Método de {{gp.title}}: {{gp.solution}}</h3>
+        <h3>Método de {{gp.title}}:</h3>
+        <hr>
+        <h4>Solución: {{gp.solution}}</h4>
         <div class='image is-4by3 columns'>
           <img src='{{routeImages}}/{{gp.image_url}}' alt='{{gp.image_url}}'>
         </div>

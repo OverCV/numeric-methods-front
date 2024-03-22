@@ -61,8 +61,8 @@ export class FoldyComponent {
         }
       },
       (error) => {
-        let message: string = `No hay constantes`
-        this.openSnackBar(message, 'Okay!', 1.4)
+        // let message: string = `No hay constantes`
+        // this.openSnackBar(message, 'Okay!', 1.4)
         console.log(error);
       }
     )

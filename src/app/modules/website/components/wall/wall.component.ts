@@ -52,8 +52,10 @@ export class WallComponent implements OnInit, OnDestroy {
     // Crear una nueva aproximación básica tipo la interfaz ya declarada
     this.approxService.createApprox(newApprox).subscribe(
       (response) => {
+        if (response.data) {
+          this.approxService.loadApproximations()
+        }
         // Si la creación fue exitosa, recargar la lista de aproximaciones
-        this.approxService.loadApproximations()
       },
       (error) => {
         console.error('Error al crear la aproximación', error)

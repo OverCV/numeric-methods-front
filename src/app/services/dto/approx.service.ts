@@ -76,7 +76,9 @@ export class ApproxService {
   /* CRUD OPS */
 
   createApprox(data: CreateApprox): Observable<GenericResponse<ApproxResponse>> {
-    return this.http.post<GenericResponse<ApproxResponse>>(`${this.server}/post`, data)
+    return this.http.post<GenericResponse<ApproxResponse>>(
+      `${this.server}/post`, data
+    )
   }
 
   readApproxs(): Observable<GenericResponse<ApproxResponse[]>> {
